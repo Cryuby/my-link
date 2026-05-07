@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이링크</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg-start: #f5efe6;
+        --bg-end: #dce8f2;
+        --card-bg: rgba(255, 255, 255, 0.85);
+        --text: #1f2933;
+        --shadow: 0 24px 60px rgba(31, 41, 51, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.7), transparent 35%),
+          linear-gradient(135deg, var(--bg-start), var(--bg-end));
+        color: var(--text);
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      }
+
+      main {
+        width: min(720px, 100%);
+        padding: 48px 32px;
+        border-radius: 28px;
+        background: var(--card-bg);
+        box-shadow: var(--shadow);
+        text-align: center;
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 1.2;
+        letter-spacing: -0.04em;
+        word-break: keep-all;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>바이브코딩 과제 제출용 마이링크 웹사이트</h1>
+    </main>
+  </body>
+</html>
