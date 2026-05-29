@@ -3,690 +3,234 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Link Landing</title>
-    <style>
-      :root {
-        color-scheme: light;
-        --bg: #f2f6f2;
-        --surface: rgba(255, 255, 255, 0.72);
-        --surface-strong: #ffffff;
-        --text: #13231a;
-        --muted: #567062;
-        --line: rgba(19, 35, 26, 0.12);
-        --accent: #0f9d7a;
-        --accent-deep: #0b6d55;
-        --accent-soft: #ddfff5;
-        --shadow: 0 24px 70px rgba(15, 51, 38, 0.12);
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        color: var(--text);
-        font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-        background:
-          radial-gradient(circle at top left, rgba(15, 157, 122, 0.16), transparent 30%),
-          radial-gradient(circle at bottom right, rgba(88, 164, 255, 0.14), transparent 24%),
-          linear-gradient(180deg, #f7fbf8 0%, var(--bg) 100%);
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.4;
-        background-image:
-          linear-gradient(rgba(19, 35, 26, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(19, 35, 26, 0.03) 1px, transparent 1px);
-        background-size: 28px 28px;
-        mask-image: radial-gradient(circle at center, black, transparent 78%);
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .page {
-        width: min(1160px, calc(100% - 32px));
-        margin: 0 auto;
-      }
-
-      .site-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 22px 0;
-      }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-      }
-
-      .brand-mark {
-        width: 42px;
-        height: 42px;
-        display: grid;
-        place-items: center;
-        border-radius: 14px;
-        background: linear-gradient(135deg, var(--accent), #6be7c6);
-        color: white;
-        box-shadow: 0 12px 24px rgba(15, 157, 122, 0.3);
-      }
-
-      .brand-copy small,
-      .eyebrow,
-      .stat-label,
-      .feature-index,
-      .meta-label {
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .brand-copy small {
-        display: block;
-        font-size: 0.7rem;
-        color: var(--muted);
-      }
-
-      .site-nav {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      .nav-link,
-      .button {
-        border-radius: 999px;
-        padding: 12px 18px;
-        font-size: 0.95rem;
-        font-weight: 700;
-        border: 1px solid var(--line);
-        transition: 180ms ease;
-      }
-
-      .nav-link:hover,
-      .button.secondary:hover {
-        background: rgba(255, 255, 255, 0.65);
-      }
-
-      .button.primary {
-        border-color: transparent;
-        color: white;
-        background: linear-gradient(135deg, var(--accent-deep), var(--accent));
-        box-shadow: 0 14px 28px rgba(15, 109, 85, 0.26);
-      }
-
-      .button.primary:hover {
-        transform: translateY(-1px);
-      }
-
-      .hero {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 40px;
-        align-items: center;
-        padding: 34px 0 88px;
-      }
-
-      .hero-copy {
-        position: relative;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        font-size: 0.72rem;
-        font-weight: 800;
-        color: var(--accent-deep);
-        background: var(--accent-soft);
-        border: 1px solid rgba(15, 157, 122, 0.18);
-      }
-
-      .eyebrow::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--accent);
-      }
-
-      h1 {
-        margin: 18px 0 20px;
-        font-size: clamp(3rem, 6vw, 5.8rem);
-        line-height: 0.98;
-        letter-spacing: -0.06em;
-      }
-
-      .hero-copy p {
-        max-width: 620px;
-        margin: 0;
-        font-size: clamp(1rem, 1.8vw, 1.15rem);
-        line-height: 1.8;
-        color: var(--muted);
-      }
-
-      .hero-actions {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        margin-top: 30px;
-      }
-
-      .hero-stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 34px;
-      }
-
-      .stat-card,
-      .panel,
-      .feature-card,
-      .meta-card {
-        border: 1px solid var(--line);
-        background: var(--surface);
-        backdrop-filter: blur(12px);
-        box-shadow: var(--shadow);
-      }
-
-      .stat-card {
-        padding: 18px;
-        border-radius: 22px;
-      }
-
-      .stat-value {
-        display: block;
-        font-size: clamp(1.5rem, 3vw, 2.2rem);
-        font-weight: 800;
-        letter-spacing: -0.05em;
-      }
-
-      .stat-label {
-        display: block;
-        margin-top: 8px;
-        font-size: 0.7rem;
-        color: var(--muted);
-      }
-
-      .hero-visual {
-        display: flex;
-        justify-content: center;
-      }
-
-      .device {
-        position: relative;
-        width: min(100%, 390px);
-        padding: 18px;
-        border-radius: 36px;
-        background: linear-gradient(180deg, #193428, #0b1c15);
-        box-shadow: 0 30px 60px rgba(8, 30, 23, 0.28);
-      }
-
-      .device::before {
-        content: "";
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        width: 96px;
-        height: 10px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.22);
-        transform: translateX(-50%);
-      }
-
-      .screen {
-        padding: 28px 20px 20px;
-        border-radius: 26px;
-        background:
-          radial-gradient(circle at top right, rgba(107, 231, 198, 0.28), transparent 26%),
-          linear-gradient(180deg, #f4fffb 0%, #ebf6f2 100%);
-      }
-
-      .profile {
-        text-align: center;
-        padding: 12px 8px 16px;
-      }
-
-      .avatar {
-        width: 84px;
-        height: 84px;
-        margin: 0 auto 16px;
-        border-radius: 28px;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(135deg, var(--accent-deep), var(--accent));
-        color: white;
-        font-size: 1.8rem;
-        font-weight: 800;
-      }
-
-      .profile strong {
-        display: block;
-        font-size: 1.15rem;
-      }
-
-      .profile span {
-        display: block;
-        margin-top: 8px;
-        color: var(--muted);
-        font-size: 0.92rem;
-        line-height: 1.6;
-      }
-
-      .link-list {
-        display: grid;
-        gap: 12px;
-      }
-
-      .link-item {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        padding: 15px 16px;
-        border-radius: 20px;
-        background: var(--surface-strong);
-        border: 1px solid rgba(19, 35, 26, 0.08);
-      }
-
-      .link-icon {
-        width: 44px;
-        height: 44px;
-        flex: 0 0 44px;
-        display: grid;
-        place-items: center;
-        border-radius: 16px;
-        color: white;
-        font-weight: 800;
-        background: linear-gradient(135deg, var(--accent), #59b5ff);
-      }
-
-      .link-copy {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .link-copy strong,
-      .link-copy span {
-        display: block;
-      }
-
-      .link-copy span {
-        margin-top: 4px;
-        font-size: 0.82rem;
-        color: var(--muted);
-      }
-
-      .link-tag {
-        font-size: 0.72rem;
-        font-weight: 800;
-        color: var(--accent-deep);
-      }
-
-      section {
-        padding: 0 0 96px;
-      }
-
-      .section-head {
-        max-width: 700px;
-        margin-bottom: 28px;
-      }
-
-      .section-head h2 {
-        margin: 10px 0 14px;
-        font-size: clamp(2rem, 4vw, 3.4rem);
-        line-height: 1.05;
-        letter-spacing: -0.05em;
-      }
-
-      .section-head p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.8;
-      }
-
-      .features {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .feature-card {
-        padding: 26px;
-        border-radius: 28px;
-      }
-
-      .feature-index {
-        color: var(--accent);
-        font-size: 0.78rem;
-        font-weight: 900;
-      }
-
-      .feature-card h3 {
-        margin: 12px 0 10px;
-        font-size: 1.2rem;
-      }
-
-      .feature-card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.75;
-      }
-
-      .split {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-      }
-
-      .panel {
-        padding: 28px;
-        border-radius: 30px;
-      }
-
-      .panel h3 {
-        margin: 0 0 14px;
-        font-size: 1.4rem;
-        letter-spacing: -0.04em;
-      }
-
-      .panel p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.8;
-      }
-
-      .panel ul {
-        margin: 18px 0 0;
-        padding: 0;
-        list-style: none;
-        display: grid;
-        gap: 12px;
-      }
-
-      .panel li {
-        padding: 14px 16px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.68);
-        border: 1px solid rgba(19, 35, 26, 0.08);
-      }
-
-      .meta-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .meta-card {
-        padding: 24px;
-        border-radius: 26px;
-      }
-
-      .meta-label {
-        font-size: 0.72rem;
-        font-weight: 800;
-        color: var(--accent);
-      }
-
-      .meta-card strong {
-        display: block;
-        margin-top: 14px;
-        font-size: 1.1rem;
-      }
-
-      .meta-card p {
-        margin: 10px 0 0;
-        color: var(--muted);
-        line-height: 1.75;
-      }
-
-      .site-footer {
-        padding: 20px 0 44px;
-        color: var(--muted);
-        font-size: 0.92rem;
-      }
-
-      @media (max-width: 980px) {
-        .hero,
-        .split,
-        .features,
-        .meta-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .hero {
-          padding-top: 16px;
-        }
-      }
-
-      @media (max-width: 720px) {
-        .page {
-          width: min(100% - 20px, 1160px);
-        }
-
-        .site-header {
-          align-items: flex-start;
-          flex-direction: column;
-        }
-
-        .hero-stats {
-          grid-template-columns: 1fr;
-        }
-
-        .nav-link,
-        .button {
-          width: 100%;
-          text-align: center;
-          justify-content: center;
-        }
-
-        .hero-actions,
-        .site-nav {
-          width: 100%;
-        }
-      }
-    </style>
+    <meta
+      name="description"
+      content="바이브코딩으로 만들고 소개하는 개인 마이링크 랜딩 페이지"
+    />
+    <title>Cryuby | My Link</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="page">
-      <header class="site-header">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="grid-noise"></div>
+
+    <header class="site-header">
+      <div class="shell">
         <a class="brand" href="#top">
-          <span class="brand-mark">ML</span>
+          <span class="brand-badge">CR</span>
           <span class="brand-copy">
-            My Link
-            <small>Vibe Coding Project</small>
+            <strong>Cryuby</strong>
+            <small>My Link Landing Page</small>
           </span>
         </a>
+
         <nav class="site-nav">
-          <a class="nav-link" href="#overview">Overview</a>
-          <a class="nav-link" href="#features">Features</a>
-          <a class="button primary" href="https://github.com/Cryuby/my-link" target="_blank" rel="noreferrer">GitHub Repo</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
         </nav>
-      </header>
+      </div>
+    </header>
 
-      <main>
-        <section class="hero" id="top">
-          <div class="hero-copy">
-            <span class="eyebrow">Landing Page</span>
-            <h1>링크 하나로<br />내 페이지를 소개하는<br />마이링크 웹사이트</h1>
-            <p>
-              바이브코딩 과제 제출용 마이링크 웹사이트를 랜딩 페이지 형태로
-              다시 구성했습니다. 참고한 저장소처럼 소개 흐름은 분명하게 두되,
-              화면 인상은 더 밝고 차분한 방향으로 분리했습니다.
-            </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#features">구성 보기</a>
-              <a class="button secondary" href="#submission">제출 정보</a>
-            </div>
-            <div class="hero-stats">
-              <article class="stat-card">
-                <span class="stat-value">1 Page</span>
-                <span class="stat-label">Static Landing</span>
-              </article>
-              <article class="stat-card">
-                <span class="stat-value">Vercel</span>
-                <span class="stat-label">Deployment Ready</span>
-              </article>
-              <article class="stat-card">
-                <span class="stat-value">Mobile</span>
-                <span class="stat-label">Responsive Layout</span>
-              </article>
-            </div>
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">Vibe Coding Portfolio</p>
+          <h1>
+            안녕하세요,
+            <span class="accent">바이브코딩으로 배우고 만드는</span>
+            <br />
+            <span id="rotating-role">개발자</span>
+            류의재입니다.
+          </h1>
+          <p class="hero-text">
+            이 페이지는 단순한 과제 제출용 링크가 아니라, 제가 어떤 흐름으로
+            만들고 배우는지 소개하는 개인 랜딩 페이지입니다. 아이디어를 빠르게
+            구현하고, AI와 협업하면서 결과물을 다듬는 과정을 중심에 두고
+            있습니다.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">프로젝트 보기</a>
+            <a class="button ghost" href="https://github.com/Cryuby/my-link" target="_blank" rel="noreferrer">GitHub 저장소</a>
           </div>
 
-          <div class="hero-visual">
-            <div class="device">
-              <div class="screen">
-                <div class="profile">
-                  <div class="avatar">CR</div>
-                  <strong>@cryuby</strong>
-                  <span>
-                    바이브코딩 과제 제출용 마이링크 웹사이트
-                    <br />
-                    랜딩 페이지 데모
-                  </span>
-                </div>
-                <div class="link-list">
-                  <div class="link-item">
-                    <div class="link-icon">GH</div>
-                    <div class="link-copy">
-                      <strong>GitHub 저장소</strong>
-                      <span>과제 제출용 소스 코드 저장소</span>
-                    </div>
-                    <span class="link-tag">OPEN</span>
-                  </div>
-                  <div class="link-item">
-                    <div class="link-icon">VE</div>
-                    <div class="link-copy">
-                      <strong>배포 링크</strong>
-                      <span>실제 접속 가능한 마이링크 주소</span>
-                    </div>
-                    <span class="link-tag">LIVE</span>
-                  </div>
-                  <div class="link-item">
-                    <div class="link-icon">PR</div>
-                    <div class="link-copy">
-                      <strong>프로젝트 소개</strong>
-                      <span>한 페이지 안에서 목적과 구성을 설명</span>
-                    </div>
-                    <span class="link-tag">INFO</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="hero-metrics">
+            <article class="metric">
+              <strong>3</strong>
+              <span>핵심 소개 섹션</span>
+            </article>
+            <article class="metric">
+              <strong>Static</strong>
+              <span>Vercel 배포 구조</span>
+            </article>
+            <article class="metric">
+              <strong>AI + Me</strong>
+              <span>바이브코딩 방식</span>
+            </article>
           </div>
-        </section>
+        </div>
 
-        <section id="overview">
-          <div class="section-head">
-            <span class="eyebrow">Overview</span>
-            <h2>참고는 구조만, 화면은 다른 방향으로.</h2>
+        <aside class="hero-card reveal">
+          <div class="profile-panel">
+            <div class="avatar">CR</div>
+            <strong>류의재 · Cryuby</strong>
             <p>
-              상단 소개와 시각적 미리보기, 중간 기능 설명, 마지막 제출 정보까지
-              자연스럽게 이어지는 랜딩 흐름을 만들었습니다. 대신 색상, 카드 형태,
-              간격, 타이포그래피 리듬은 지금 사이트에 맞게 새로 잡았습니다.
+              빠르게 만들고, 직접 확인하고, 다시 다듬는 방식으로 웹 프로젝트를
+              쌓아가는 중입니다.
             </p>
           </div>
-          <div class="split">
-            <article class="panel">
-              <h3>이 페이지에서 바로 보이는 것</h3>
-              <ul>
-                <li>이 사이트가 무엇인지 첫 화면에서 바로 이해되도록 구성</li>
-                <li>모바일에서도 한 화면씩 차례대로 읽히는 세로 중심 레이아웃</li>
-                <li>Vercel 정적 배포에 맞는 단일 HTML 구조</li>
-              </ul>
-            </article>
-            <article class="panel">
-              <h3>이번 구성에서 바꾼 점</h3>
-              <p>
-                따뜻한 크림 톤 대신 민트 기반의 밝은 인터페이스를 사용했고,
-                종이 카드 느낌보다 유리 패널과 디바이스 프리뷰 중심으로 재구성했습니다.
-                랜딩 페이지이면서도 과제 제출용 사이트라는 목적이 흐려지지 않도록
-                카피를 단순하게 유지했습니다.
-              </p>
-            </article>
-          </div>
-        </section>
 
-        <section id="features">
-          <div class="section-head">
-            <span class="eyebrow">Features</span>
-            <h2>이 랜딩 페이지에 들어간 핵심 블록</h2>
+          <div class="link-stack">
+            <a class="link-card" href="https://github.com/Cryuby" target="_blank" rel="noreferrer">
+              <span class="link-icon">GH</span>
+              <span class="link-copy">
+                <strong>GitHub</strong>
+                <small>코드와 실습 기록</small>
+              </span>
+            </a>
+            <a class="link-card" href="https://github.com/Cryuby/my-link" target="_blank" rel="noreferrer">
+              <span class="link-icon">ML</span>
+              <span class="link-copy">
+                <strong>My Link Repo</strong>
+                <small>현재 랜딩 페이지 소스</small>
+              </span>
+            </a>
+            <div class="link-card static">
+              <span class="link-icon">VC</span>
+              <span class="link-copy">
+                <strong>Vibe Coding</strong>
+                <small>프롬프트, 구현, 검증 중심 제작 방식</small>
+              </span>
+            </div>
           </div>
-          <div class="features">
-            <article class="feature-card">
-              <span class="feature-index">01</span>
-              <h3>첫 화면 메시지</h3>
-              <p>
-                방문자가 접속하자마자 이 사이트가 과제 제출용 마이링크 웹사이트라는
-                점을 명확하게 읽을 수 있도록 큰 헤드라인을 배치했습니다.
-              </p>
-            </article>
-            <article class="feature-card">
-              <span class="feature-index">02</span>
-              <h3>모바일 프리뷰 카드</h3>
-              <p>
-                실제 마이링크 서비스처럼 보이는 디바이스 프리뷰를 두어 단순 문구
-                페이지보다 랜딩 사이트 느낌이 나도록 구성했습니다.
-              </p>
-            </article>
-            <article class="feature-card">
-              <span class="feature-index">03</span>
-              <h3>제출용 정보 구역</h3>
-              <p>
-                저장소와 배포 링크를 어디에 적어야 하는지 마지막 섹션에서 다시
-                정리할 수 있게 제출 목적의 정보 블록을 따로 뒀습니다.
-              </p>
-            </article>
-          </div>
-        </section>
+        </aside>
+      </section>
 
-        <section id="submission">
-          <div class="section-head">
-            <span class="eyebrow">Submission</span>
-            <h2>과제 제출용으로 바로 활용 가능한 정보</h2>
-          </div>
-          <div class="meta-grid">
-            <article class="meta-card">
-              <span class="meta-label">Repository</span>
-              <strong>GitHub 저장소 URL</strong>
-              <p>https://github.com/Cryuby/my-link</p>
-            </article>
-            <article class="meta-card">
-              <span class="meta-label">My Link</span>
-              <strong>배포된 Vercel 주소</strong>
-              <p>실제 제출 시 여기에는 현재 사용 중인 Vercel URL을 적으면 됩니다.</p>
-            </article>
-            <article class="meta-card">
-              <span class="meta-label">Message</span>
-              <strong>페이지 핵심 문구</strong>
-              <p>바이브코딩 과제 제출용 마이링크 웹사이트</p>
-            </article>
-          </div>
-        </section>
-      </main>
+      <section class="shell intro-grid" id="about">
+        <article class="panel reveal">
+          <p class="section-tag">About Me</p>
+          <h2>소개는 간단하게, 작업 방식은 분명하게.</h2>
+          <p class="section-copy">
+            저는 바이브코딩을 단순히 “AI가 대신 코드를 써주는 방식”으로 보지
+            않습니다. 요구를 정리하고, 구조를 선택하고, 나온 결과를 검증하면서
+            더 나은 방향으로 빠르게 반복하는 작업 방식이라고 생각합니다.
+          </p>
+          <ul class="bullet-list">
+            <li>프론트엔드 화면을 빠르게 시각화하고 바로 수정합니다.</li>
+            <li>작은 단위로 배포하며 결과를 실제 접속 환경에서 확인합니다.</li>
+            <li>AI 결과물을 그대로 두지 않고 목적에 맞게 재구성합니다.</li>
+          </ul>
+        </article>
 
-      <footer class="site-footer">
-        <p>© 2026 My Link Landing. Static page for Vercel deployment.</p>
-      </footer>
-    </div>
+        <article class="panel reveal">
+          <p class="section-tag">Focus</p>
+          <h2>지금 집중하는 것</h2>
+          <div class="chips">
+            <span>Landing Page</span>
+            <span>Personal Branding</span>
+            <span>Static Deploy</span>
+            <span>UI Composition</span>
+            <span>Prompt Iteration</span>
+            <span>Vercel</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="shell project-section" id="projects">
+        <div class="section-head">
+          <p class="section-tag">Projects</p>
+          <h2>바이브코딩으로 만드는 개인 웹 작업</h2>
+          <p class="section-copy">
+            아래 카드는 정적인 소개 문구가 아니라, 지금 페이지의 목적과 제작
+            방향을 보여주는 프로젝트 블록입니다. 필요하면 이후 실제 작업물에
+            맞춰 계속 확장할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="project-filters">
+          <button class="filter-button active" data-filter="all">All</button>
+          <button class="filter-button" data-filter="identity">Identity</button>
+          <button class="filter-button" data-filter="build">Build</button>
+          <button class="filter-button" data-filter="deploy">Deploy</button>
+        </div>
+
+        <div class="project-grid" id="project-grid"></div>
+      </section>
+
+      <section class="shell timeline-section">
+        <div class="section-head narrow">
+          <p class="section-tag">Workflow</p>
+          <h2>제가 바이브코딩으로 작업하는 흐름</h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <span>01</span>
+            <div>
+              <h3>문제 정의</h3>
+              <p>무엇을 보여줄지 먼저 정하고, 한 화면 안에서 정보 우선순위를 잡습니다.</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <span>02</span>
+            <div>
+              <h3>AI와 초안 생성</h3>
+              <p>레이아웃과 카피 초안을 빠르게 만든 뒤, 그대로 쓰지 않고 분해해서 판단합니다.</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <span>03</span>
+            <div>
+              <h3>직접 수정</h3>
+              <p>스타일, 구조, 문구를 제 목적에 맞게 다시 손봐서 결과물의 방향을 고정합니다.</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <span>04</span>
+            <div>
+              <h3>배포 및 검증</h3>
+              <p>실제 링크로 접속해 모바일과 데스크톱에서 확인하고 필요한 수정을 반복합니다.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="shell contact-section" id="contact">
+        <div class="contact-card reveal">
+          <div>
+            <p class="section-tag">Contact</p>
+            <h2>이 페이지는 앞으로 내 작업을 계속 쌓는 시작점입니다.</h2>
+            <p class="section-copy">
+              현재는 마이링크 과제를 위한 개인 랜딩 페이지지만, 이후에는 실제
+              프로젝트 링크, 소개, 작업 기록을 연결하는 허브로 확장할 수 있게
+              구성해두었습니다.
+            </p>
+          </div>
+
+          <div class="contact-links">
+            <a href="https://github.com/Cryuby" target="_blank" rel="noreferrer">GitHub Profile</a>
+            <a href="https://github.com/Cryuby/my-link" target="_blank" rel="noreferrer">This Repository</a>
+            <a href="https://vercel.com" target="_blank" rel="noreferrer">Vercel Deploy</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-row">
+        <p>© 2026 Cryuby. Built for a vibe-coding based personal landing page.</p>
+        <a href="#top">Back to top</a>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
   </body>
 </html>
